@@ -1,5 +1,36 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}!
+
+  .container-fluid
+    .row
+      .col-md-4
+        h1#Title Feeder.gg
+      ul.col-md-8.list-inline.text-right#top-right
+        li
+          a(href=""): .glyphicon.glyphicon-envelope  Newsletter
+        li
+          a(href=""): .glyphicon.glyphicon-leaf  RSS
+        li |
+        li
+          form.form-inline(role="form")
+            .form-group
+              .label.sr-only Email Address
+              input.form-control(type="email",placeholder="enter email")
+              button.btn.btn-default(type="submit") Register!
+    nav.row#navigationBar
+      .col-sm-12
+     ul.nav.nav-tabs#navs
+       li.active: a(href="") Groups
+       li: a(href="") Stats
+       li: a(href="") Settings
+       li: a(href="") Help
+       li: a(href="") About
+    
+    .row#element-row
+      .col-sm-5
+        include col-main
+      .col-sm-4.col-secondary
+        include col-secondary
+      .col-sm-3
+        include col-tertiary
