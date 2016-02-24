@@ -1,0 +1,35 @@
+extends layout
+
+block content
+
+  include topheader
+
+  .container-fluid
+    .row
+      .col-sm-8.col-sm-offset-2
+        div.registerArea
+          h1 Register for f33der.gg!
+      .col-sm-4.col-sm-offset-4
+          form
+            .form-group
+              input.form-control.registerInput#userEmail(type="email",placeholder="Email")
+              input.form-control.registerInput#userPass(type="Password",placeholder="Password")
+              input.form-control.registerInput#userSummonerName(type="text",placeholder="Summoner Name")
+
+            .form-group
+              .dropdown
+                button.btn.btn-default.dropdown-toggle#dropdownmenu(data-toggle="dropdown",type="button") Region 
+                  .span.caret
+                ul.dropdown-menu.dropdown-menu-right#regionDrop-down(role="menu",aria-labelledby="dropdownmenu")
+                  li(role="presentation")
+                    a(role="menuitem",tabindex='-1', href='#') NA
+                  li(role="presentation")
+                    a(role="menuitem",tabindex='-1', href='#') EUW
+                  li(role="presentation")
+                    a(role="menuitem",tabindex='-1', href='#') JP
+                  li(role="presentation")
+                    a(role="menuitem",tabindex='-1', href='#') KR
+
+            .form-group
+              button.btn.btn-primary.btn-lg(type="submit").registerButton Register!
+

@@ -1,0 +1,16 @@
+.registerArea h1{
+	font-size: 45px;
+	display: block;
+}
+
+.registerInput {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.registerButton {
+}
+
+.container-fluid {
+	text-align: center;
+}

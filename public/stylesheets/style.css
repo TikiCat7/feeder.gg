@@ -11,6 +11,15 @@ img {
 	max-width: 100%;
 }
 
+.titleRow {
+	background: lightgrey;
+}
+
+.iconStyle {
+	color: black;
+	font: "Lucida Grande";
+}
+
 .col-secondary {
 	border: 1px solid #ccc
 	border-top: none;
@@ -35,17 +44,48 @@ img {
 }
 
 #Title {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+}
 
+#subTitle {
+	text-align: center;
+    width: 100%;
+    position: absolute;
+}
+
+.titleSection {
+
+}
+
+.titleHeader {
+	margin-right: 200px;
+	margin-bottom: 0px;
+	margin-top: -10px;
+}
+
+.titleHeader h1.title  {
+	text-align: center;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	cursor: pointer;
+}
+
+.titleHeader h1.subTitle {
+	width: 100%;
+	text-align: center;
+	font-size: 10px;
+	margin-top: 0px;
 }
 
 #navigationBar{
 	padding-top: 20px;
+	width: 100%;
 }
 
-#navs{
-	padding: 20px 10px 0;
-	background: #eee;
-	border-radius: 5px 5px 0 0;
+#navbar{
+	padding-top: 20px;
 }
 
 .small-dark-title{
@@ -65,4 +105,50 @@ img {
 
 #sampleText{
 	vertical-align: middle;
+}
+
+#badge{
+	position: center;
+}
+
+.mainContentRow {
+	padding-right: 100px;
+}
+
+.mainContentTitle {
+	font-size: 50px;
+	margin: 5px;
+}
+
+.mainContent {
+	margin-top: 20px;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+}
+
+.hovered {
+	background: #f2f2f2;
+}
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+  }
+  /*entire ul*/
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  /*when hovering*/
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  /*non active a*/
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
