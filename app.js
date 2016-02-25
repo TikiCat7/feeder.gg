@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 //mongo schema
 var userModel = require('./model');
@@ -14,9 +15,14 @@ var config = require('./config');
 
 //routing
 var routes = require('./routes/index');
-var register = require('./routes/register');
+var registerRoute = require('./routes/register');
+var userRoute = require('./routes/users');
+var privateRoute = require('./routes/private');
 
 var app = express();
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +37,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/register', register);
+app.use('/users',userRoute);
+app.use('/register', registerRoute);
+app.use('/private', privateRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,6 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var userModel = require('../model');
 var config = require('../config');
+var jwt = require('jsonwebtoken');
+
+
+//connect to db
 mongoose.connect(config.database);
 
 
@@ -37,8 +41,17 @@ router.post('/newRegister', function(req,res,next){
 				if(err) {
 					return res.json({ success: false, message: 'That email address already exists.'});
 				}
+
 			console.log('User saved successfully');
-			res.json({success: true, message: 'New User Added Successfully'});
+			var token = jwt.sign(user, config.secret, {
+              expiresIn: 10080 // in seconds
+            });
+			// res.setHeader('charset', 'utf-8');
+			// res.setHeader('Set-Cookie', 'jwt'=token);
+
+			//set jwt as cookie
+			res.cookie('jwt',token, { maxAge: 900000, httpOnly: true });
+			res.json({success: true, message: 'New User Added Successfully', jwt: token});
 			});
 		}
 	});

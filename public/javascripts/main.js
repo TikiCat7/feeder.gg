@@ -40,7 +40,11 @@ function registerUser() {
 	}
 
 	$.post('/register/newRegister',user).success(function(res){
-		console.log(res.message);
+		console.log(res.message)
+		res.success == true ? console.log('your token is: '+res.jwt) : console.log(res.message);
+
+		//cookie now has jwt stored
+
 		//login
 		//store returned JWT if registration + login successful
 		//redirect to dashboard
