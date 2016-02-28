@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userModel = require('../model');
 var config = require('../config');
 var jwt = require('jsonwebtoken');
+var cookie = require('js-cookie');
 
 
 //connect to db
@@ -17,6 +18,8 @@ router.get('/', function(req,res, next){
 
 router.post('/newRegister', function(req,res,next){
 	console.log("new registration recieved");
+	//console.log(cookie.get());
+
 	//console.log(req.body);
 
 	//check if email is already registered
@@ -43,15 +46,31 @@ router.post('/newRegister', function(req,res,next){
 				}
 
 			console.log('User saved successfully');
-			var token = jwt.sign(user, config.secret, {
+
+			var tokenPayload = {
+				email : req.body.email,
+				summonername : req.body.summonername,
+				region : req.body.regin
+			}
+
+			var token = jwt.sign(tokenPayload, config.secret, {
               expiresIn: 10080 // in seconds
             });
 			// res.setHeader('charset', 'utf-8');
 			// res.setHeader('Set-Cookie', 'jwt'=token);
 
-			//set jwt as cookie
+			//set jwt as cookie - cookie method
 			res.cookie('jwt',token, { maxAge: 900000, httpOnly: true });
 			res.json({success: true, message: 'New User Added Successfully', jwt: token});
+
+			//set jwt as response header
+			// res.writeHead(200, {
+   //  			'content-type': 'text/html',
+   //  			'authorization': token
+  	// 		});
+  	// 		res.end();
+  			//res.json({success: true, message: 'New User Added Successfully', jwt: token})
+
 			});
 		}
 	});

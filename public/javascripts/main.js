@@ -31,6 +31,7 @@ $(".registerButton").on('click', function(){
 
 
 function registerUser() {
+	console.log("in registerUser()");
 
 	var user = {
 		'email':$("#userEmail").val(),
@@ -41,7 +42,23 @@ function registerUser() {
 
 	$.post('/register/newRegister',user).success(function(res){
 		console.log(res.message)
+		
 		res.success == true ? console.log('your token is: '+res.jwt) : console.log(res.message);
+
+		if(res.success==true) {
+			//console.log(document.coookies);
+			//if new user was made, try accessing protected api
+			console.log('setting auth header as:'+res.jwt);
+			$.ajax({
+				url: '/private/test',
+				type: 'GET',
+				beforeSend: function(xhr) {
+ 		      		xhr.setRequestHeader("Authorization",res.jwt);
+    			}
+			}).success(function(res){
+				console.log(res.message);
+			});
+		}
 
 		//cookie now has jwt stored
 
@@ -49,6 +66,21 @@ function registerUser() {
 		//store returned JWT if registration + login successful
 		//redirect to dashboard
 	});
+
+
+
+	// $.ajax({
+	// 	url: '/register/newRegister',
+	// 	type: 'POST',
+	// 	data: user,
+	// 	beforeSend: function(xhr) {
+ //      		xhr.setRequestHeader("Authorization", "Bearer " + $.cookie('jwt'));
+ //    	}
+	// }).success(function(res){
+	// 	console.log(res.message);
+	// 	res.success == true ? console.log('your token is: '+res.jwt) : console.log(res.message);
+	// });
+	
 };
 
 });
